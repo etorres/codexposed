@@ -32,12 +32,12 @@ public class AllIntegrationTests {
 
 	@BeforeClass
 	public static void setup() {
-		System.out.println("AllIntegrationTests.setup()");		
+		System.out.println(" >> AllIntegrationTests.setup()");		
 	}
 
 	@AfterClass
 	public static void release() {
-		System.out.println("AllIntegrationTests.release()");
+		System.out.println(" >> AllIntegrationTests.release()");
 	}
 
 }

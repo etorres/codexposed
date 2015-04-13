@@ -27,17 +27,17 @@ import org.junit.runners.Suite.SuiteClasses;
  * @author Erik Torres <etserrano@gmail.com>
  */
 @RunWith(Suite.class)
-@SuiteClasses({ })
+@SuiteClasses({ StringArgValidatorTest.class, ListArgValidatorTest.class, MapArgValidatorTest.class })
 public class AllUnitTests {
 
 	@BeforeClass
 	public static void setup() {
-		System.out.println("AllJUnitTests.setup()");		
+		System.out.println(" >> AllUnitTests.setup()");		
 	}
 
 	@AfterClass
 	public static void release() {
-		System.out.println("AllJUnitTests.release()");
+		System.out.println(" >> AllUnitTests.release()");
 	}
 
 }
