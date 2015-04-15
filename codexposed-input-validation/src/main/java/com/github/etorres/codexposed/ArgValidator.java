@@ -54,10 +54,10 @@ public class ArgValidator {
 	 * @return A string combining both input parameters in lexicographical order.
 	 * @throws NullPointerException When a required parameter has <code>null</code> value.
 	 */
-	public String simpleParams(final String required, final @Nullable String optional) {		
-		final String required2 = checkNotNull(trimToNull(required), "Uninitialized or invalid value");
+	public String stringParams(final String required, final @Nullable String optional) {		
+		final String required2 = checkNotNull(trim(required), "Uninitialized or invalid value");
 		final String optional2 = fromNullable(trimToNull(optional)).or(DEFAULT_VALUE);
-		// operate on the input data
+		// operate on the canonicalized version of the parameters
 		return on(',').skipNulls().join(natural().nullsFirst().sortedCopy(newArrayList(required2, optional2)));
 	}
 
@@ -69,11 +69,11 @@ public class ArgValidator {
 	 * @throws NullPointerException When a required parameter has <code>null</code> value.
 	 * @throws IllegalArgumentException When a required parameter is blank or empty.
 	 */
-	public String simpleParams2(final String required, final @Nullable String optional) {		
+	public String stringParams2(final String required, final @Nullable String optional) {		
 		final String required2 = checkNotNull(trim(required), "Uninitialized value");
 		checkArgument(!required2.isEmpty(), "Empty string is not allowed");
 		final String optional2 = fromNullable(trimToNull(optional)).or(DEFAULT_VALUE);
-		// operate on the input data
+		// operate on the canonicalized version of the parameters
 		return on(',').skipNulls().join(natural().nullsFirst().sortedCopy(newArrayList(required2, optional2)));
 	}
 
@@ -87,7 +87,7 @@ public class ArgValidator {
 	public List<String> listParams(final List<String> required, final @Nullable List<String> optional) {
 		final List<String> required2 = unmodifiableList(checkNotNull(required, "Uninitialized list"));
 		final List<String> optional2 = (optional != null ? unmodifiableList(optional) : Collections.<String>emptyList());
-		// operate on the input data
+		// operate on the canonicalized version of the parameters
 		return newArrayList(concat(required2, optional2));
 	}
 
@@ -103,7 +103,7 @@ public class ArgValidator {
 		final List<String> required2 = unmodifiableList(checkNotNull(required, "Uninitialized list"));
 		checkArgument(!required2.isEmpty(), "Empty list is not allowed");
 		final List<String> optional2 = (optional != null ? unmodifiableList(optional) : Collections.<String>emptyList());
-		// operate on the input data
+		// operate on the canonicalized version of the parameters
 		return newArrayList(concat(required2, optional2));
 	}
 
@@ -117,7 +117,7 @@ public class ArgValidator {
 	public List<String> immutableListParams(final List<String> required, final @Nullable List<String> optional) {
 		final ImmutableList<String> required2 = ImmutableList.copyOf(checkNotNull(required, "Uninitialized list"));
 		final ImmutableList<String> optional2 = (optional != null ? ImmutableList.copyOf(optional) : ImmutableList.<String>of());
-		// operate on the input data
+		// operate on the canonicalized version of the parameters
 		return newArrayList(concat(required2, optional2));
 	}
 
@@ -131,7 +131,7 @@ public class ArgValidator {
 	public List<String> mutableListParams(final List<String> required, final @Nullable List<String> optional) {
 		final List<String> required2 = newArrayList(checkNotNull(required, "Uninitialized list"));
 		final List<String> optional2 = (optional != null ? newArrayList(optional) : Lists.<String>newArrayList());
-		// operate on the input data
+		// operate on the canonicalized version of the parameters
 		return newArrayList(concat(required2, optional2));
 	}
 
@@ -145,7 +145,7 @@ public class ArgValidator {
 	public Map<String, String> mapParams(final Map<String, String> required, final @Nullable Map<String, String> optional) {
 		final Map<String, String> required2 = unmodifiableMap(checkNotNull(required, "Uninitialized map"));
 		final Map<String, String> optional2 = (optional != null ? unmodifiableMap(optional) : Collections.<String, String>emptyMap());
-		// operate on the input data
+		// operate on the canonicalized version of the parameters
 		final Map<String, String> response = new Hashtable<>(required2);
 		response.putAll(optional2);
 		return response;
@@ -163,7 +163,7 @@ public class ArgValidator {
 		final Map<String, String> required2 = unmodifiableMap(checkNotNull(required, "Uninitialized map"));
 		checkArgument(!required2.isEmpty(), "Empty map is not allowed");
 		final Map<String, String> optional2 = (optional != null ? unmodifiableMap(optional) : Collections.<String, String>emptyMap());
-		// operate on the input data
+		// operate on the canonicalized version of the parameters
 		final Map<String, String> response = new Hashtable<>(required2);
 		response.putAll(optional2);
 		return response;
@@ -179,7 +179,7 @@ public class ArgValidator {
 	public Map<String, String> immutableMapParams(final Map<String, String> required, final @Nullable Map<String, String> optional) {
 		final ImmutableMap<String, String> required2 = ImmutableMap.copyOf(checkNotNull(required, "Uninitialized list"));
 		final ImmutableMap<String, String> optional2 = (optional != null ? ImmutableMap.copyOf(optional) : ImmutableMap.<String, String>of());
-		// operate on the input data
+		// operate on the canonicalized version of the parameters
 		final Map<String, String> response = new Hashtable<>(required2);
 		response.putAll(optional2);
 		return response;		
@@ -195,7 +195,7 @@ public class ArgValidator {
 	public Map<String, String> mutableMapParams(final Map<String, String> required, final @Nullable Map<String, String> optional) {
 		final Map<String, String> required2 = new Hashtable<>(checkNotNull(required, "Uninitialized list"));
 		final Map<String, String> optional2 = (optional != null ? new Hashtable<>(optional) : new Hashtable<String, String>());
-		// operate on the input data
+		// operate on the canonicalized version of the parameters
 		final Map<String, String> response = new Hashtable<>(required2);
 		response.putAll(optional2);
 		return response;

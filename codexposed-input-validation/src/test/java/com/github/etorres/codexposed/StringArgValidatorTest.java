@@ -84,10 +84,9 @@ public class StringArgValidatorTest {
 		assumeTrue(VALID.equals(type));
 		System.out.println("    >> StringArgValidatorTest.test()");
 		/* uncomment for additional output */
-		System.out.println("        >> Expected: '" + expected + "', Required: '" + required 
-				+ "', Optional: '" + optional + "'");
+		System.out.println("        >> Expected: '" + expected + "', Required: '" + required + "', Optional: '" + optional + "'");
 		final ArgValidator validator = new ArgValidator();
-		final String result = validator.simpleParams(required, optional);
+		final String result = validator.stringParams(required, optional);
 		assertThat("result is not null", result, notNullValue());
 		assertThat("result is not empty", isNotBlank(trimToEmpty(result)), equalTo(true));
 		assertThat("result coincides with expected", result, equalTo(expected));		
@@ -98,10 +97,9 @@ public class StringArgValidatorTest {
 		assumeTrue(NULL_VALUE.equals(type));
 		System.out.println("    >> StringArgValidatorTest.testNullValue()");
 		/* uncomment for additional output */
-		System.out.println("        >> NullPointerException expected, Required: '" + required 
-				+ "', Optional: '" + optional + "'");
+		System.out.println("        >> NullPointerException expected, Required: '" + required + "', Optional: '" + optional + "'");
 		final ArgValidator validator = new ArgValidator();
-		validator.simpleParams(required, optional);
+		validator.stringParams(required, optional);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -109,10 +107,9 @@ public class StringArgValidatorTest {
 		assumeTrue(EMPTY_VALUE.equals(type));
 		System.out.println("    >> StringArgValidatorTest.testEmptyValue()");
 		/* uncomment for additional output */
-		System.out.println("        >> IllegalArgumentException expected, Required: '" + required 
-				+ "', Optional: '" + optional + "'");
+		System.out.println("        >> IllegalArgumentException expected, Required: '" + required + "', Optional: '" + optional + "'");
 		final ArgValidator validator = new ArgValidator();
-		validator.simpleParams2(required, optional);
+		validator.stringParams2(required, optional);
 	}
 
 }
