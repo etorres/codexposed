@@ -75,6 +75,7 @@
 		
 		<!-- Convenience properties to set library versions -->
 		<hamcrest.version>1.3</hamcrest.version> <!-- coincides with JUnit dependency -->
+		<jackson.version>2.5.2</jackson.version>
 		<junit.version>4.12</junit.version>		
 		<log4j.version>2.2</log4j.version>
 		<mockito.version>1.10.19</mockito.version>
@@ -112,6 +113,14 @@
 				<version>3.0.0</version>
 			</dependency>
 			
+			<!-- Jackson Java JSON library -->
+			
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-databind</artifactId>
+				<version>2.5.2</version>
+			</dependency>
+			
 			<!-- Log4j logging framework -->
 			
 			<dependency>
@@ -130,6 +139,14 @@
 				<groupId>org.apache.logging.log4j</groupId>
 				<artifactId>log4j-slf4j-impl</artifactId>
 				<version>${log4j.version}</version>
+			</dependency>
+			
+			<!-- MongoDB Java Driver -->
+			
+			<dependency>
+				<groupId>org.mongodb</groupId>
+				<artifactId>mongodb-driver</artifactId>
+				<version>3.0.0</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -309,5 +326,6 @@
 	</build>	
 	<modules>
 		<module>codexposed-input-validation</module>
+		<module>codexposed-mongodb-fieldnames</module>
 	</modules>
 </project>

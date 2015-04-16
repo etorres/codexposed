@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.github.etorres.codexposed;
+package com.github.etorres.codexposed.test;
 
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.apache.commons.lang3.StringUtils.trimToEmpty;
@@ -33,6 +33,7 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 
+import com.github.etorres.codexposed.ArgValidator;
 import com.google.common.collect.Lists;
 
 /**

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.github.etorres.codexposed;
+package com.github.etorres.codexposed.test;
 
 import static com.google.common.collect.ImmutableMap.of;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -33,6 +33,7 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 
+import com.github.etorres.codexposed.ArgValidator;
 import com.google.common.collect.Lists;
 
 /**

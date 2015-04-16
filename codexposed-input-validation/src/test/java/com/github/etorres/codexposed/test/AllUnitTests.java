@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.github.etorres.codexposed;
+package com.github.etorres.codexposed.test;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -23,21 +23,21 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 /**
- * Integration tests suite.
+ * Unit tests suite.
  * @author Erik Torres <etserrano@gmail.com>
  */
 @RunWith(Suite.class)
-@SuiteClasses({ })
-public class AllIntegrationTests {
+@SuiteClasses({ StringArgValidatorTest.class, ListArgValidatorTest.class, MapArgValidatorTest.class })
+public class AllUnitTests {
 
 	@BeforeClass
 	public static void setup() {
-		System.out.println(" >> AllIntegrationTests.setup()");		
+		System.out.println(" >> AllUnitTests.setup()");		
 	}
 
 	@AfterClass
 	public static void release() {
-		System.out.println(" >> AllIntegrationTests.release()");
+		System.out.println(" >> AllUnitTests.release()");
 	}
 
 }

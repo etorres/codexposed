@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.github.etorres.codexposed;
+package com.github.etorres.codexposed.test;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -27,7 +27,7 @@ import org.junit.runners.Suite.SuiteClasses;
  * @author Erik Torres <etserrano@gmail.com>
  */
 @RunWith(Suite.class)
-@SuiteClasses({ StringArgValidatorTest.class, ListArgValidatorTest.class, MapArgValidatorTest.class })
+@SuiteClasses({ MongoDBSafeMapTest.class })
 public class AllUnitTests {
 
 	@BeforeClass
