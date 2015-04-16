@@ -64,6 +64,8 @@
 		
 		<!-- Convenience properties to set Maven plugins versions -->
 		<buildnumber-maven-plugin.version>1.3</buildnumber-maven-plugin.version>
+		<embedmongo-maven-plugin.version>0.1.12</embedmongo-maven-plugin.version>
+		<embedmongo-maven-plugin.mongodb.version>3.0.2</embedmongo-maven-plugin.mongodb.version>
 		<exec-maven-plugin.version>1.4.0</exec-maven-plugin.version>
 		<m2e.lifecycle-mapping.version>1.0.0</m2e.lifecycle-mapping.version>					
 		<maven-assembly-plugin.version>2.5.3</maven-assembly-plugin.version>
@@ -77,8 +79,10 @@
 		<hamcrest.version>1.3</hamcrest.version> <!-- coincides with JUnit dependency -->
 		<jackson.version>2.5.2</jackson.version>
 		<junit.version>4.12</junit.version>		
-		<log4j.version>2.2</log4j.version>
+		<log4j.version>2.2</log4j.version>		
+		<logback.version>1.1.3</logback.version>		
 		<mockito.version>1.10.19</mockito.version>
+		<slf4j.version>1.7.12</slf4j.version>
 	</properties>
 	
 	<dependencyManagement>
@@ -139,6 +143,20 @@
 				<groupId>org.apache.logging.log4j</groupId>
 				<artifactId>log4j-slf4j-impl</artifactId>
 				<version>${log4j.version}</version>
+			</dependency>
+			
+			<!-- Logback -->
+
+			<dependency> <!-- classic module (uses the SLF4J API) -->
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+				<version>${logback.version}</version>
+			</dependency>			
+
+			<dependency> <!-- SLF4J java.util.logging (jul) bridge -->
+				<groupId>org.slf4j</groupId>
+				<artifactId>jul-to-slf4j</artifactId>
+				<version>${slf4j.version}</version>
 			</dependency>
 			
 			<!-- MongoDB Java Driver -->
@@ -279,6 +297,11 @@
 							</goals>
 						</execution>
 					</executions>
+				</plugin>
+				<plugin> <!-- MongoDB database -->
+					<groupId>com.github.joelittlejohn.embedmongo</groupId>
+					<artifactId>embedmongo-maven-plugin</artifactId>
+					<version>${embedmongo-maven-plugin.version}</version>
 				</plugin>
 				
 				<!-- Package configuration: place a build time-stamp in jar or war manifest -->

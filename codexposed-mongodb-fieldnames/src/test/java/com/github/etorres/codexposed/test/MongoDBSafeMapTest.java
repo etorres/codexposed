@@ -28,6 +28,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import java.io.IOException;
 import java.util.Map.Entry;
 
+import org.bson.Document;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -76,23 +77,23 @@ public class MongoDBSafeMapTest {
 	public void testMapOperations() {
 		System.out.println("    >> MongoDBSafeMapTest.testMapOperations()");
 		for (int i = 0; i < names.length; i++) {		
-			final MongoDBSafeMap<MongoDBSafeKey, String> map = new MongoDBSafeMap<>();
-			map.put(escapeMapKey(names[i]), "Hello World!");
-			assertThat("map is not empty", map.isEmpty(), equalTo(false));
+			final MongoDBSafeMap<MongoDBSafeKey, String> safeMap = new MongoDBSafeMap<>();
+			safeMap.put(escapeMapKey(names[i]), "Hello World!");
+			assertThat("map is not empty", safeMap.isEmpty(), equalTo(false));
 			// uncomment for additional output
-			for (final Entry<MongoDBSafeKey, String> entry : map.entrySet()) {
+			for (final Entry<MongoDBSafeKey, String> entry : safeMap.entrySet()) {
 				System.out.println("        >> Map entry: [" + entry.getKey().getKey() + ", " + entry.getValue() + "]");
 			}
 
 			final MongoDBSafeKey key = new MongoDBSafeKey();
 			key.setKey(escapedNames[i]);
 
-			String value = map.get(key);
+			String value = safeMap.get(key);
 			assertThat("value is not null", value, notNullValue());
 			assertThat("value is not empty", isNotBlank(value), equalTo(true));
 			assertThat("value coincides with expected", value, equalTo("Hello World!"));
 
-			value = map.getUnescaped(names[i]);
+			value = safeMap.getUnescaped(names[i]);
 			assertThat("value is not null", value, notNullValue());
 			assertThat("value is not empty", isNotBlank(value), equalTo(true));
 			assertThat("value coincides with expected", value, equalTo("Hello World!"));
@@ -103,12 +104,12 @@ public class MongoDBSafeMapTest {
 	public void testJsonObjectMapper() throws IOException {
 		System.out.println("    >> MongoDBSafeMapTest.testJsonObjectMapper()");
 		for (int i = 0; i < names.length; i++) {		
-			final MongoDBSafeMap<MongoDBSafeKey, String> map = new MongoDBSafeMap<>();
-			map.put(escapeMapKey(names[i]), "Hello World!");
-			assertThat("map is not empty", map.isEmpty(), equalTo(false));
+			final MongoDBSafeMap<MongoDBSafeKey, String> safeMap = new MongoDBSafeMap<>();
+			safeMap.put(escapeMapKey(names[i]), "Hello World!");
+			assertThat("map is not empty", safeMap.isEmpty(), equalTo(false));
 
 			// test JSON serialization
-			final String payload = JSON_MAPPER.writeValueAsString(map);
+			final String payload = JSON_MAPPER.writeValueAsString(safeMap);
 			assertThat("serialized map is not null", payload, notNullValue());
 			assertThat("serialized map is not empty", isNotBlank(payload), equalTo(true));
 			/* uncomment for additional output */
@@ -116,13 +117,27 @@ public class MongoDBSafeMapTest {
 
 			// test JSON deserialization
 			@SuppressWarnings("unchecked")
-			final MongoDBSafeMap<MongoDBSafeKey, String> map2 = JSON_MAPPER.readValue(payload, MongoDBSafeMap.class);
-			assertThat("deserialized map is not null", map2, notNullValue());
-			assertThat("deserialized map coincides with expected", map2, equalTo(map));
+			final MongoDBSafeMap<MongoDBSafeKey, String> safeMap2 = JSON_MAPPER.readValue(payload, MongoDBSafeMap.class);
+			assertThat("deserialized map is not null", safeMap2, notNullValue());
+			assertThat("deserialized map coincides with expected", safeMap2, equalTo(safeMap));
 			// uncomment for additional output
-			for (final Entry<MongoDBSafeKey, String> entry : map2.entrySet()) {
+			for (final Entry<MongoDBSafeKey, String> entry : safeMap2.entrySet()) {
 				System.out.println("        >> Map entry: [" + entry.getKey().getKey() + ", " + entry.getValue() + "]");
 			}
+		}
+	}
+
+	@Test
+	public void testMongoDBDocument() {
+		System.out.println("    >> MongoDBSafeMapTest.testMongoDBDocument()");
+		for (int i = 0; i < names.length; i++) {		
+			final MongoDBSafeMap<MongoDBSafeKey, String> safeMap = new MongoDBSafeMap<>();
+			safeMap.put(escapeMapKey(names[i]), "Hello World!");
+			assertThat("map is not empty", safeMap.isEmpty(), equalTo(false));
+
+			final Document doc = new Document(safeMap.toMap());			
+			assertThat("document is not null", doc, notNullValue());
+			assertThat("document is not empty", doc.isEmpty(), equalTo(false));
 		}
 	}
 

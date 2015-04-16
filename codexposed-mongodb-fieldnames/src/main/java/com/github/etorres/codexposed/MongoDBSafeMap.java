@@ -16,8 +16,10 @@
 
 package com.github.etorres.codexposed;
 
-import static com.google.common.base.MoreObjects.toStringHelper;
 import static com.github.etorres.codexposed.MongoDBSafeKey.escapeMapKey;
+import static com.google.common.base.MoreObjects.toStringHelper;
+import static com.google.common.collect.Maps.newHashMap;
+import static java.util.Collections.unmodifiableMap;
 
 import java.util.Collection;
 import java.util.Hashtable;
@@ -104,6 +106,14 @@ public class MongoDBSafeMap<K extends MongoDBSafeKey, V> implements Map<K, V> {
 
 	public V getUnescaped(final String key) {		
 		return __map.get(escapeMapKey(key));
+	}
+
+	public Map<String, Object> toMap() {
+		final Map<String, Object> map = newHashMap();
+		for (final Map.Entry<K, V> entry : __map.entrySet()) {
+			map.put(entry.getKey().getKey(), entry.getValue());
+		}
+		return unmodifiableMap(map);
 	}
 
 	@Override

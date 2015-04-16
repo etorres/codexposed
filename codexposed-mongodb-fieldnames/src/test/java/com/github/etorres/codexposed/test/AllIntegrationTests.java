@@ -16,6 +16,10 @@
 
 package com.github.etorres.codexposed.test;
 
+import static com.github.etorres.codexposed.logging.LogManager.LOG_MANAGER;
+
+import java.io.IOException;
+
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
@@ -27,17 +31,21 @@ import org.junit.runners.Suite.SuiteClasses;
  * @author Erik Torres <etserrano@gmail.com>
  */
 @RunWith(Suite.class)
-@SuiteClasses({ })
+@SuiteClasses({ MongoDBCollectionTest.class })
 public class AllIntegrationTests {
 
 	@BeforeClass
 	public static void setup() {
-		System.out.println(" >> AllIntegrationTests.setup()");		
+		System.out.println(" >> AllIntegrationTests.setup()");
+		LOG_MANAGER.preload();
 	}
 
 	@AfterClass
 	public static void release() {
 		System.out.println(" >> AllIntegrationTests.release()");
+		try {
+			LOG_MANAGER.close();
+		} catch (IOException ignore) { }
 	}
 
 }

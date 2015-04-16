@@ -57,7 +57,19 @@
 		<dependency>
 			<groupId>org.mongodb</groupId>
 			<artifactId>mongodb-driver</artifactId>
-		</dependency>		
+		</dependency>
+		
+		<!-- Logback and SLF4J logging framework -->
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jul-to-slf4j</artifactId>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 	
 	<build>
@@ -75,6 +87,31 @@
 			<!-- Integration tests -->
 			<plugin>
 				<artifactId>maven-failsafe-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>com.github.joelittlejohn.embedmongo</groupId>
+				<artifactId>embedmongo-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>start</id>
+						<goals>
+							<goal>start</goal>
+						</goals>
+						<configuration>
+							<port>27017</port>
+							<version>${embedmongo-maven-plugin.mongodb.version}</version>
+							<logging>file</logging>
+							<logFile>${project.build.directory}/embedmongo.log</logFile>
+							<bindIp>localhost</bindIp>
+						</configuration>
+					</execution>
+					<execution>
+						<id>stop</id>
+						<goals>
+							<goal>stop</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
