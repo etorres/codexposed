@@ -120,9 +120,9 @@
 			<!-- Jackson Java JSON library -->
 			
 			<dependency>
-				<groupId>com.fasterxml.jackson.core</groupId>
-				<artifactId>jackson-databind</artifactId>
-				<version>2.5.2</version>
+  				<groupId>com.fasterxml.jackson.core</groupId>
+  				<artifactId>jackson-databind</artifactId>
+  				<version>[2.9.10.7,)</version>
 			</dependency>
 			
 			<!-- Log4j logging framework -->
