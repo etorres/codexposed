@@ -92,7 +92,7 @@
 			<dependency> <!-- I/O routines -->
 				<groupId>commons-io</groupId>
 				<artifactId>commons-io</artifactId>
-				<version>2.4</version>
+				<version>2.7</version>
 			</dependency>
 			
 			<dependency> <!-- Utility classes for the classes that are considered to be Java standards -->
