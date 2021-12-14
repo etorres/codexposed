@@ -79,7 +79,7 @@
 		<hamcrest.version>1.3</hamcrest.version> <!-- coincides with JUnit dependency -->
 		<jackson.version>2.5.2</jackson.version>
 		<junit.version>4.12</junit.version>		
-		<log4j.version>2.15.0</log4j.version>		
+		<log4j.version>2.16.0</log4j.version>		
 		<logback.version>1.2.0</logback.version>		
 		<mockito.version>1.10.19</mockito.version>
 		<slf4j.version>1.7.12</slf4j.version>
